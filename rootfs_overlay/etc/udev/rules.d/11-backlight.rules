@@ -1,0 +1,2 @@
+ACTION!="remove",SUBSYSTEM=="platform",DRIVER=="rpi-backlight", \
+ATTR{backlight/rpi_backlight/brightness}="12"
