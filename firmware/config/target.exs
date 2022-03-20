@@ -106,8 +106,26 @@ config :mdns_lite,
     }
   ]
 
+
+config :ui, UiWeb.Endpoint,
+  url: [host: "nerves.local"],
+  http: [port: 80],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  secret_key_base: "12345678901234567890123456789012",
+  live_view: [signing_salt: "ABCDEFGHIJJKLMNO"],
+  check_origin: false,
+  render_errors: [view: UiWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Ui.PubSub,
+  server: true,
+  code_reloader: false
+
+config :phoenix, :json_library, Jason
+
+import_config "../../ui/config/config.exs"
+
 # Import target specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 # Uncomment to use target specific configurations
 
 # import_config "#{Mix.target()}.exs"
+

@@ -1,4 +1,4 @@
-defmodule NervesWebKioskPlayground.Application do
+defmodule Firmware.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -12,7 +12,7 @@ defmodule NervesWebKioskPlayground.Application do
     context_menu: false,
     sounds: false,
     data_dir: "/root/browser/",
-    homepage: "file:///srv/erlang/lib/webengine_kiosk-0.4.0/priv/www/index.html",
+    homepage: "http://127.0.0.1:4000",
     run_as_root: true,
     platform_udev: true,
     platform_shared_memory: true,
@@ -21,7 +21,7 @@ defmodule NervesWebKioskPlayground.Application do
 
   def start(_type, _args) do
     # See https://hexdocs.pm/elixir/Supervisor.html
-    opts = [strategy: :one_for_one, name: NervesWebKioskPlayground.Supervisor]
+    opts = [strategy: :one_for_one, name: Firmware.Supervisor]
 
     children =
       [
@@ -34,7 +34,7 @@ defmodule NervesWebKioskPlayground.Application do
   # List all child processes to be supervised
   def children(:host) do
     [
-      # {NervesWebKioskPlayground.Worker, arg},
+      # {Firmware.Worker, arg},
     ]
   end
 
@@ -43,6 +43,6 @@ defmodule NervesWebKioskPlayground.Application do
   end
 
   def target() do
-    Application.get_env(:nerves_web_kiosk_playground, :target)
+    Application.get_env(:firmware, :target)
   end
 end

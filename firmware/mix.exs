@@ -1,7 +1,7 @@
-defmodule NervesWebKioskPlayground.MixProject do
+defmodule Firmware.MixProject do
   use Mix.Project
 
-  @app :anschlagbrett
+  @app :firmware
   @version "0.1.0"
   @all_targets [:rpi4_kiosk]
 
@@ -22,7 +22,7 @@ defmodule NervesWebKioskPlayground.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      mod: {NervesWebKioskPlayground.Application, []},
+      mod: {Firmware.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -32,13 +32,13 @@ defmodule NervesWebKioskPlayground.MixProject do
     [
       # Dependencies for all targets
       {:nerves, "~> 1.7.8", runtime: false},
-      {:shoehorn, "~> 0.7.0"},
+      {:shoehorn, "~> 0.8"},
       {:ring_logger, "~> 0.8.1"},
       {:toolshed, "~> 0.2.13"},
 
       # Dependencies for all targets except :host
       {:nerves_runtime, "~> 0.11.3", targets: @all_targets},
-      {:nerves_pack, "~> 0.4.0", targets: @all_targets},
+      {:nerves_pack, "~> 0.7", targets: @all_targets},
 
       # {:webengine_kiosk, "~> 0.4.0", path: "../webengine_kiosk", app: false},
       {:webengine_kiosk, "~> 0.4.0", github: "elcritch/webengine_kiosk"},
@@ -50,7 +50,8 @@ defmodule NervesWebKioskPlayground.MixProject do
        github: "elcritch/nerves_system_rpi4",
        tag: "v1.16.0-webengineV3",
        runtime: false,
-       targets: [:rpi4_kiosk]}
+       targets: @all_targets},
+       {:ui, path: "../ui", targets: @all_targets, env: Mix.env()}
     ]
   end
 
