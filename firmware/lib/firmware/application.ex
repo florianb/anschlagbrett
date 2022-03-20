@@ -12,7 +12,7 @@ defmodule Firmware.Application do
     context_menu: false,
     sounds: false,
     data_dir: "/root/browser/",
-    homepage: "http://127.0.0.1:4000",
+    homepage: "http://127.0.0.1:4000/board",
     run_as_root: true,
     platform_udev: true,
     platform_shared_memory: true,
